@@ -25,9 +25,9 @@ class Program
         while (userInput != "quit" && scripture.CheckAllBlank() == false) {
             Console.WriteLine("\nPress enter to continue or type 'quit' to finish");
             userInput = Console.ReadLine();
+            Console.Clear();
             scripture.Blank(3);
             scripture.Print();
-            // Console.Clear();
         }
         Console.WriteLine("\nThanks for playing!");
     }
