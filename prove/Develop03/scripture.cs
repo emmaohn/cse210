@@ -1,29 +1,36 @@
 public class Scripture {
-    public string _ref;
-    public List<string> _words = new List<string>();
-    public class Scripgenerator {
-        public string[] _scriptures = {
-            "John 3:16|For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
-            "psalms 3:5-6|I laid me down and slept; I awaked; for the Lord sustained me. I will not be afraid of ten thousands of people, that have set themselves against me round about."
-        };
-        public string GetScripture() {
-            Random randomGenerator = new Random();
-            int number = randomGenerator.Next(0,_scriptures.Length);
-            return _scriptures[number];
-        }
-        // Reference reference = new Reference("Proverbs", 3, 5, 6);
-        // Scripture scripture = new Scripture(reference, "Trust in the Lord with all thine heart and lean not unto thine own understanding; in all thy ways acknowledge him, and he shall direct thy paths.");
-    }
-
-    public void Print(string scripture){
-        // string[] scrip = scripture;
-        int i = 0;
+    private Reference _ref;
+    private List<int> _remainingWordIndexes = new List<int>();
+    private List<Word> _words = new List<Word>();
+    public Scripture(Reference reference, string scripture){
+        _ref = reference;
         string[] parts = scripture.Split(" ");
-        foreach (string word in parts){
-            _words.Add(new Word(parts[i++]));
+        foreach (string word in parts) {
+            _words.Add(new Word(word));
+            _remainingWordIndexes.Add(_words.Count - 1);
         }
-        
     }
-    
-    
+    private bool isBlank(int i) {
+        return !_remainingWordIndexes.Contains(i);
+    }
+    public void Print(){
+        for (int i = 0; i < _words.Count; i++) {
+            _words[i].Print(!_remainingWordIndexes.Contains(i));
+            Console.Write(" ");
+        }
+    }
+    public void Blank(int blanks) {
+        Random randomGenerator = new Random();
+        int randomBlankIndex = -1;
+        for (int i = 0; i < blanks; i++) {
+            do {
+                if (CheckAllBlank()) {break;}
+                randomBlankIndex = randomGenerator.Next(_words.Count);
+            } while (isBlank(randomBlankIndex));
+            _remainingWordIndexes.Remove(randomBlankIndex);
+        }
+    }
+    public bool CheckAllBlank() {
+        return _remainingWordIndexes.Count < 1;
+    }
 }

@@ -1,24 +1,24 @@
 public class Reference {
-    string _book;
-    int _chapter;
-    int _startverse;
-    int _endverse = 0;
-    public Reference(string book, int chapter, int startverse, int endverse){
-        book = _book;
-        chapter = _chapter;
-        startverse = _startverse;
-        endverse = _endverse;
+    private string _book;
+    private int _chapter;
+    private int _startVerse;
+    private int _endVerse = 0;
+    public Reference(string book, int chapter, int startVerse, int endVerse){
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
     }
-    public Reference(string book, int chapter, int startverse){
-        book = _book;
-        chapter = _chapter;
-        startverse = _startverse;
+    public Reference(string book, int chapter, int startVerse){
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
     }
     public void Print(){
-        if (_endverse != 0) {
-            Console.WriteLine($"{_book} {_chapter}:{_startverse}-{_endverse}");
+        if (_endVerse != 0) {
+            Console.WriteLine($"{_book} {_chapter}:{_startVerse}-{_endVerse}");
         } else {
-            Console.WriteLine($"{_book} {_chapter}:{_startverse}");
+            Console.WriteLine($"{_book} {_chapter}:{_startVerse}");
         }
     }
 }

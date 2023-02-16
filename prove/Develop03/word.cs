@@ -1,14 +1,14 @@
 public class Word {
     private string _word;
-    private bool _isblank;
     public Word(string word){
-        word = _word;
+        _word = word;
     }
-    public void Print() {
-        Console.WriteLine(_word);
-        if (_isblank) {
+    public void Print(bool isBlank) {
+        if (isBlank) {
             int wordLength = _word.Length;
-            Console.WriteLine(wordLength * '_');
+            Console.Write(new string('_', wordLength));
+        } else {
+            Console.Write(_word);
         }
     }
 }
