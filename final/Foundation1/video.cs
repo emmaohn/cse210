@@ -8,7 +8,7 @@ public class Video {
         _author = author;
         _length = length;
     }
-    public void comment(string username, string comment) {
+    public void Comment(string username, string comment) {
         Comment newComment = new Comment(username, comment);
         _comments.Add(newComment);
     }
