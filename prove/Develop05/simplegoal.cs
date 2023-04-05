@@ -1,22 +1,27 @@
 public class SimpleGoal : Goal {
-    public SimpleGoal(string goalName, string goalDescription, int points) : base (goalName, goalDescription, points) {
-
+    private bool _complete;
+    public SimpleGoal(string goalName, string goalDescription, int points, bool complete) : base(goalName, goalDescription, points) {
+        _complete = complete;
     }
-    public override void CreateGoal() {
-        // name
-        Console.WriteLine("What is the name of your goal? ");
-        string name = Console.ReadLine();
-        // description
-        Console.WriteLine("What is a short description of your goal? ");
-        string description = Console.ReadLine();
-        // points
-        Console.WriteLine("What is the amount of points associated with this goal? ");
-        string userInputPoints = Console.ReadLine();
-        int points = int.Parse(userInputPoints);
-        // new simple goal
-        Goal goal = new SimpleGoal(name, description, points);
+    public override int RecordEvent() {
+        if (IsComplete()){
+            return 0;
+        } else {
+            _complete = true;
+            return GetPoints();
+        }
     }
-    // public override string GetSaveData() {
-    //     return $"{_goalName}|{_goalDescription}|{points}";
-    // }
+    public override bool IsComplete() {
+        return _complete;
+    }
+    public override string GetDisplayString() {
+        if (IsComplete()) {
+            return $"[X] {_goalName} ({_goalDescription})";
+        } else {
+            return $"[ ] {_goalName} ({_goalDescription})";
+        }
+    }
+    public override string GetSaveData() {
+        return $"SimpleGoal|{_goalName}|{_goalDescription}|{_points}|{_complete}";
+    }
 }

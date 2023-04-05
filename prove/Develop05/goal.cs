@@ -1,52 +1,28 @@
 public abstract class Goal {
-    private List<Goal> _goalList = new List<Goal>();
-    private string _goalName;
-    private string _goalDescription;
-    private int _points;
+    // public string _goalType;
+    public string _goalName;
+    public string _goalDescription;
+    public int _points;
     public Goal(string goalName, string goalDescription, int points) {
         _goalName = goalName;
         _goalDescription = goalDescription;
         _points = points;
     }
-    public abstract void CreateGoal();
-    // public abstract void RecordGoal();
-    public void CompleteGoal() {
+    public abstract int RecordEvent();
+    public abstract bool IsComplete();
+    // returns a bool whether goal is complete or not
+    // determines whether an x is displayed or not
+    public abstract string GetDisplayString();
+    // display string for displaying goal
+    public abstract string GetSaveData();
+    // save data to save goal in list
 
+    public int GetPoints() {
+        return _points;
     }
-    // OVERRIDE
-    // public void CreateEntry(string _date, string _prompt, string _userInput) {
-    //     Goal goal = new Goal(_goalName, _goalDescription);
-    //     _goalList.Add(goal);
-    // }
-    // public abstract string GetSaveData();
-    // public override string GetSaveData() {
-    //     return $"{_goalName}|{_goalDescription}|{points}";
-    // }
-    public void Print() {
-        Console.WriteLine($"{_goalName}: {_goalDescription}");
-    }
-    public void DisplayEntries() {
-        // if there are no entries, nothing will print
-        if (_goalList.Count() == 0) {
-            Console.WriteLine("No current journal entries");
-        // display current entries
-        } else {
-            foreach (Goal goal in _goalList) {
-                goal.Print();
-            }
-        }
-    }
-    // public void LoadJournal(string fileName) {
-    //     // _journal = "myFile.txt";
-    //     string[] lines = System.IO.File.ReadAllLines(fileName);
 
-    //     foreach (string line in lines) {
-    //         string[] parts = line.Split("|");
 
-    //         // 0 date, 1 prompt, 2 userInput
-    //         _goalList.Add(new Goal(parts[0],parts[1]));
-    //     }
-    // }
+
     // public void SaveJournal(string fileName) {
     //     using (StreamWriter outputFile = new StreamWriter(fileName)) {
     //         // store journal entries
@@ -55,4 +31,5 @@ public abstract class Goal {
     //         }
     //     }
     // }
+    // public abstract void GetGoalData();
 }
